@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {AppRootStateType} from "../../../src/app/store";
+import {AppRootStateType} from "app/store";
 import {
     addTodolistTC,
     changeTodolistFilterAC,
@@ -9,18 +9,18 @@ import {
     FilterValuesType,
     removeTodolistTC,
     TodolistDomainType
-} from "../../../src/features/TodolistsList/todolists-reducer";
-import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from "../../../src/features/TodolistsList/tasks-reducer";
-import {TaskStatuses} from "../../../src/api/todolists-api";
-import {AddItemForm} from "../../../src/components/AddItemForm/AddItemForm";
-import {Todolist} from "../../../src/features/TodolistsList/Todolist/Todolist";
+} from "features/TodolistsList/todolists-reducer";
+import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from "features/TodolistsList/tasks-reducer";
+import {TaskStatuses} from "api/todolists-api";
+import {AddItemForm} from "components/AddItemForm/AddItemForm";
+import {Todolist} from "features/TodolistsList/Todolist/Todolist";
 import {View} from "react-native";
 
-type PropsType = {
+type Props = {
     demo?: boolean
 }
 
-export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
+export const TodolistsList = ({demo = false}: Props) => {
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)

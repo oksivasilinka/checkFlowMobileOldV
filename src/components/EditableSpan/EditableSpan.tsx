@@ -1,24 +1,24 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, View} from "react-native";
-import {globalStyles} from "../../../globalStyles";
+import {globalStyles} from "globalStyles";
 import {MaterialIcons} from '@expo/vector-icons';
 
-type EditableSpanPropsType = {
+type Props = {
     value: string
     onChange: (newValue: string) => void
 }
 
-export const EditableSpan = React.memo(function (props: EditableSpanPropsType) {
+export const EditableSpan = React.memo(function ({value, onChange}: Props) {
     let [editMode, setEditMode] = useState(false);
-    let [title, setTitle] = useState(props.value);
+    let [title, setTitle] = useState(value);
 
     const activateEditMode = () => {
         setEditMode(true);
-        setTitle(props.value);
+        setTitle(value);
     }
     const activateViewMode = () => {
         setEditMode(false);
-        props.onChange(title);
+        onChange(title);
     }
     const changeTitle = (e: string) => {
         setTitle(e)
@@ -35,7 +35,7 @@ export const EditableSpan = React.memo(function (props: EditableSpanPropsType) {
                         <MaterialIcons name="done" size={30} color={"#e91e63"} onPress={activateViewMode}/>
                     </View>
                 </View>}
-            {!editMode && <Text style={{fontSize: 20}} onLongPress={activateEditMode}>{props.value}</Text>
+            {!editMode && <Text style={{fontSize: 20}} onLongPress={activateEditMode}>{value}</Text>
             }
         </View>
     )

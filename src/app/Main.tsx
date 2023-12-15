@@ -1,16 +1,16 @@
 import React, {useCallback, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {StyleSheet, Text, View,} from "react-native";
-import {AppRootStateType} from "../../src/app/store";
-import {initializeAppTC, RequestStatusType} from "../../src/app/app-reducer";
-import {logoutTC} from "../../src/features/Login/auth-reducer";
-import {TodolistsList} from "../../src/features/TodolistsList/TodolistsList";
+import {AppRootStateType} from "app/store";
+import {initializeAppTC, RequestStatusType} from "app/app-reducer";
+import {logoutTC} from "features/Login/auth-reducer";
+import {TodolistsList} from "features/TodolistsList/TodolistsList";
 
-type PropsType = {
+type Props = {
     demo?: boolean
 }
 
-export const Main = ({demo = false}: PropsType) => {
+export const Main = ({demo = false}: Props) => {
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
     const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)

@@ -1,19 +1,19 @@
 import React, {useCallback} from 'react'
-import {TaskStatuses, TaskType} from "../../../../../src/api/todolists-api";
+import {TaskStatuses, TaskType} from "api/todolists-api";
 import {Checkbox} from "expo-checkbox";
-import {EditableSpan} from "../../../../../src/components/EditableSpan/EditableSpan";
+import {EditableSpan} from "components/EditableSpan/EditableSpan";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 import {MaterialIcons} from '@expo/vector-icons';
-import {globalStyles} from "../../../../../globalStyles";
+ import {globalStyles} from "globalStyles";
 
-type TaskPropsType = {
+type Props = {
     task: TaskType
     todolistId: string
     changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void
     changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void
     removeTask: (taskId: string, todolistId: string) => void
 }
-export const Task = React.memo(({task, removeTask, changeTaskTitle, changeTaskStatus, todolistId}: TaskPropsType) => {
+export const Task = React.memo(({task, removeTask, changeTaskTitle, changeTaskStatus, todolistId}: Props) => {
     const onClickHandler = useCallback(() => removeTask(task.id, todolistId), [task.id, todolistId]);
 
     const onChangeHandler = useCallback((checked: boolean) => {
@@ -30,7 +30,8 @@ export const Task = React.memo(({task, removeTask, changeTaskTitle, changeTaskSt
             <View style={styles.task}>
                 <Checkbox color={'#e91e63'} value={task.status === TaskStatuses.Completed}
                           onValueChange={onChangeHandler}
-                          style={[globalStyles.border]}/>
+                          style={[globalStyles.border]}
+                />
                 <EditableSpan value={task.title} onChange={onTitleChangeHandler}/>
             </View>
             <TouchableOpacity onPress={onClickHandler}>

@@ -1,7 +1,28 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
-    "lib": ["es5", "es6", "dom"],
+    "lib": [
+      "es5",
+      "es6",
+      "dom"
+    ],
     "strict": true,
-  }
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    ".expo",
+    "App.tsx",
+    "assets",
+    ".gitignore",
+    "app.json",
+    "babel.config.js",
+    "package-lock.json",
+    "package.json",
+    "tsconfig.json",
+    "yarn.lock"
+  ]
 }
