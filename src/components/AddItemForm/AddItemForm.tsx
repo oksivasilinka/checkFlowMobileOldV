@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity, View} from "react-native";
 import {AntDesign} from '@expo/vector-icons';
-import {globalStyles} from "globalStyles";
+import {globalStyles} from 'globalStyles'
+
 
 type Props = {
     addItem: (title: string) => void
