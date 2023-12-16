@@ -2,31 +2,49 @@ import React from 'react'
 import {Provider} from 'react-redux'
 import {Main} from "app/Main";
 import {store} from "app/store";
-import {View, StyleSheet, Button} from "react-native";
+import {Button} from "react-native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {NavigationContainer} from '@react-navigation/native';
 import {Login} from "features/Login/Login";
+import {SafeAreaProvider} from "react-native-safe-area-context";
+import {WithSaveAreaView} from "componentHelper/WithSaveAreaView";
+import {NavigationsType} from "types/navigationsType";
+import {NativeStackScreenProps} from "react-native-screens/native-stack";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from "@react-navigation/drawer";
+
+
 type PropsType = {
     demo?: boolean
 }
 
-const Stack = createNativeStackNavigator();
+//const Stack = createNativeStackNavigator<NavigationsType>();
+ const Stack = createBottomTabNavigator<NavigationsType>();
+// const Stack = createDrawerNavigator<NavigationsType>();
 
-function HomeScreen({navigation}: any) {
+const HomeScreen = ({navigation}: NativeStackScreenProps<NavigationsType, 'Home'>) => {
     return (
-        <View style={styles.container}>
-            <Main/>
-            <Button title={'login'} onPress={()=> {navigation.navigate('Login')}}/>
-        </View>
+        <WithSaveAreaView>
+            <>
+                <Main/>
+                <Button title={'login'} onPress={() => {
+                    navigation.navigate('Login')
+                }}/>
+            </>
+        </WithSaveAreaView>
     );
 }
 
-function LoginScreen({navigation}: any) {
+const LoginScreen = ({navigation}: NativeStackScreenProps<NavigationsType, 'Login'>) => {
     return (
-        <View style={styles.container}>
-            <Login/>
-            <Button title={'Home'} onPress={()=> {navigation.navigate('Home')}}/>
-        </View>
+       <WithSaveAreaView>
+           <>
+               <Login/>
+               <Button title={'Home'} onPress={() => {
+                   navigation.navigate('Home')
+               }}/>
+           </>
+       </WithSaveAreaView>
     );
 }
 
@@ -35,20 +53,15 @@ export default function App() {
 
 
     return (
-        <NavigationContainer>
-            <Provider store={store}>
-                <Stack.Navigator>
-                    <Stack.Screen name="Home" component={HomeScreen}/>
-                    <Stack.Screen name="Login" component={LoginScreen}/>
-                </Stack.Navigator>
-            </Provider>
-        </NavigationContainer>
+        <SafeAreaProvider>
+            <NavigationContainer>
+                <Provider store={store}>
+                    <Stack.Navigator>
+                        <Stack.Screen name="Home" component={HomeScreen}/>
+                        <Stack.Screen name="Login" component={LoginScreen}/>
+                    </Stack.Navigator>
+                </Provider>
+            </NavigationContainer>
+        </SafeAreaProvider>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#ffffff'
-    }
-})
