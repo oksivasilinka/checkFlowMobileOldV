@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {AppRootStateType} from "app/store";
+import {useSelector} from 'react-redux'
+import {AppRootStateType, useAppDispatch} from "app/store";
 import {
     addTodolistTC,
     changeTodolistFilterAC,
@@ -21,38 +21,33 @@ export const TodolistsList = () => {
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (!isLoggedIn) {
             return;
         }
         const thunk = fetchTodolistsTC()
-        // @ts-ignore
         dispatch(thunk)
     }, [])
 
     const removeTask = useCallback(function (id: string, todolistId: string) {
         const thunk = removeTaskTC(id, todolistId)
-        // @ts-ignore
         dispatch(thunk)
     }, [])
 
     const addTask = useCallback(function (title: string, todolistId: string) {
         const thunk = addTaskTC(title, todolistId)
-        // @ts-ignore
         dispatch(thunk)
     }, [])
 
     const changeStatus = useCallback(function (id: string, status: TaskStatuses, todolistId: string) {
         const thunk = updateTaskTC(id, {status}, todolistId)
-        // @ts-ignore
         dispatch(thunk)
     }, [])
 
     const changeTaskTitle = useCallback(function (id: string, newTitle: string, todolistId: string) {
         const thunk = updateTaskTC(id, {title: newTitle}, todolistId)
-        // @ts-ignore
         dispatch(thunk)
     }, [])
 
@@ -63,19 +58,16 @@ export const TodolistsList = () => {
 
     const removeTodolist = useCallback(function (id: string) {
         const thunk = removeTodolistTC(id)
-        // @ts-ignore
         dispatch(thunk)
     }, [])
 
     const changeTodolistTitle = useCallback(function (id: string, title: string) {
         const thunk = changeTodolistTitleTC(id, title)
-        // @ts-ignore
         dispatch(thunk)
     }, [])
 
     const addTodolist = useCallback((title: string) => {
         const thunk = addTodolistTC(title)
-        // @ts-ignore
         dispatch(thunk)
     }, [dispatch])
 

@@ -1,14 +1,14 @@
 import React from 'react'
 import {useFormik} from 'formik'
-import {useDispatch, useSelector} from 'react-redux'
+import {useSelector} from 'react-redux'
 import {Navigate} from 'react-router-dom'
-import {AppRootStateType} from "app/store";
+import {AppRootStateType, useAppDispatch} from "app/store";
 import {loginTC} from "features/Login/auth-reducer";
 import {Button, Text, TextInput, View} from "react-native";
 import {Checkbox} from "expo-checkbox";
 
 export const Login = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
     //

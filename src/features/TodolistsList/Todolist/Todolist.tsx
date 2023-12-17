@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect} from 'react'
-import {useDispatch} from 'react-redux'
 import {fetchTasksTC} from "features/TodolistsList/tasks-reducer";
 import {FilterValuesType, TodolistDomainType} from "features/TodolistsList/todolists-reducer";
 import {TaskStatuses, TaskType} from "api/todolists-api";
@@ -9,6 +8,7 @@ import {AddItemForm} from "components/AddItemForm/AddItemForm";
 import {Button, StyleSheet, TouchableOpacity, View} from "react-native";
 import {MaterialIcons} from '@expo/vector-icons';
 import {globalStyles} from "globalStyles";
+import {useAppDispatch} from "app/store";
 
 type Props = {
     todolist: TodolistDomainType
@@ -36,10 +36,9 @@ export const Todolist = React.memo(function ({
                                              }: Props) {
 
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     useEffect(() => {
         const thunk = fetchTasksTC(todolist.id)
-        // @ts-ignore
         dispatch(thunk)
     }, [])
 
@@ -48,7 +47,7 @@ export const Todolist = React.memo(function ({
     }, [addTask, todolist.id])
 
     const removeTodolistHandler = () => {
-        // removeTodolist(props.todolist.id)
+        removeTodolist(todolist.id)
     }
     const changeTodolistTitleHandler = useCallback((title: string) => {
         changeTodolistTitle(todolist.id, title)

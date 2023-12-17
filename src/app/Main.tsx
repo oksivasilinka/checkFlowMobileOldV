@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector} from 'react-redux'
 import {StyleSheet, Text, View,} from "react-native";
-import {AppRootStateType} from "app/store";
+import {AppRootStateType, useAppDispatch} from "app/store";
 import {initializeAppTC, RequestStatusType} from "app/app-reducer";
 import {logoutTC} from "features/Login/auth-reducer";
 import {TodolistsList} from "features/TodolistsList/TodolistsList";
@@ -10,15 +10,13 @@ export const Main = () => {
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
     const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        // @ts-ignore
         dispatch(initializeAppTC())
     }, [])
 
     const logoutHandler = useCallback(() => {
-        // @ts-ignore
         dispatch(logoutTC())
     }, [])
 
@@ -59,7 +57,6 @@ export const Main = () => {
 const styles = StyleSheet.create({
     mainWrapper: {
         flex: 1,
-        paddingTop: 70,
         paddingHorizontal: 10
     },
     title: {

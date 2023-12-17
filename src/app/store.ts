@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux'
 import {useDispatch} from "react-redux";
 import {configureStore} from "@reduxjs/toolkit";
-import {tasksReducer} from "../../src/features/TodolistsList/tasks-reducer";
-import {todolistsReducer} from "../../src/features/TodolistsList/todolists-reducer";
-import {appReducer} from "../../src/app/app-reducer";
-import {authReducer} from "../../src/features/Login/auth-reducer";
+import {tasksReducer} from "features/TodolistsList/tasks-reducer";
+import {todolistsReducer} from "features/TodolistsList/todolists-reducer";
+import {appReducer} from "app/app-reducer";
+import {authReducer} from "features/Login/auth-reducer";
 
 
 const rootReducer = combineReducers({
