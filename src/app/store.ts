@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {useDispatch} from "react-redux";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {configureStore} from "@reduxjs/toolkit";
 import {tasksReducer} from "features/TodolistsList/tasks-reducer";
 import {todolistsReducer} from "features/TodolistsList/todolists-reducer";
@@ -20,6 +20,7 @@ export type AppRootStateType = ReturnType<typeof rootReducer>
 
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = useDispatch<AppDispatch>
+export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 
 // @ts-ignore
 window.store = store;
