@@ -19,14 +19,11 @@ import {View} from "react-native";
 export const TodolistsList = () => {
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if (!isLoggedIn) {
-            return;
-        }
         const thunk = fetchTodolistsTC()
         dispatch(thunk)
     }, [])
@@ -71,12 +68,8 @@ export const TodolistsList = () => {
         dispatch(thunk)
     }, [dispatch])
 
-    if (!isLoggedIn) {
-        // return <Navigate to={"/login"}/>
-    }
-
     return (
-        <View style={{ gap: 40}}>
+        <View style={{gap: 40}}>
             <View>
                 {todolists.map(tl => {
                     let allTodolistTasks = tasks[tl.id]

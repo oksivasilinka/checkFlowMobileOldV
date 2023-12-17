@@ -68,7 +68,7 @@ export const Todolist = React.memo(function ({
     }
 
     return (
-        <View style={[globalStyles.border, styles.wrapper]}>
+        <View style={[globalStyles.card, styles.wrapper]}>
             <View style={styles.title}>
                 <EditableSpan value={todolist.title} onChange={changeTodolistTitleHandler}/>
 
