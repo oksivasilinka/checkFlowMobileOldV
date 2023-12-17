@@ -6,11 +6,7 @@ import {initializeAppTC, RequestStatusType} from "app/app-reducer";
 import {logoutTC} from "features/Login/auth-reducer";
 import {TodolistsList} from "features/TodolistsList/TodolistsList";
 
-type Props = {
-    demo?: boolean
-}
-
-export const Main = ({demo = false}: Props) => {
+export const Main = () => {
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
     const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
@@ -52,7 +48,7 @@ export const Main = ({demo = false}: Props) => {
             <View style={{flex: 1}}>
                 {/*<Routes>*/}
                 {/*    <Route path={'/'} element={<TodolistsList demo={demo}/>}/>*/}
-                <TodolistsList demo={demo}/>
+                <TodolistsList/>
                 {/*<Route path={'/login'} element={<Login/>}/>*/}
                 {/*</Routes>*/}
             </View>

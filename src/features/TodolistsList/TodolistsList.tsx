@@ -16,11 +16,7 @@ import {AddItemForm} from "components/AddItemForm/AddItemForm";
 import {Todolist} from "features/TodolistsList/Todolist/Todolist";
 import {View} from "react-native";
 
-type Props = {
-    demo?: boolean
-}
-
-export const TodolistsList = ({demo = false}: Props) => {
+export const TodolistsList = () => {
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
@@ -28,7 +24,7 @@ export const TodolistsList = ({demo = false}: Props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (demo || !isLoggedIn) {
+        if (!isLoggedIn) {
             return;
         }
         const thunk = fetchTodolistsTC()
@@ -104,7 +100,7 @@ export const TodolistsList = ({demo = false}: Props) => {
                                 removeTodolist={removeTodolist}
                                 changeTaskTitle={changeTaskTitle}
                                 changeTodolistTitle={changeTodolistTitle}
-                                demo={demo}
+
                             />
                         </View>
                     )

@@ -13,11 +13,6 @@ import {NativeStackScreenProps} from "react-native-screens/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from "@react-navigation/drawer";
 
-
-type PropsType = {
-    demo?: boolean
-}
-
 //const Stack = createNativeStackNavigator<NavigationsType>();
  const Stack = createBottomTabNavigator<NavigationsType>();
 // const Stack = createDrawerNavigator<NavigationsType>();

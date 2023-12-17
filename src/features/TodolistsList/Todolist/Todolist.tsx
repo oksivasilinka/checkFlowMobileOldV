@@ -20,27 +20,24 @@ type Props = {
     removeTask: (taskId: string, todolistId: string) => void
     removeTodolist: (id: string) => void
     changeTodolistTitle: (id: string, newTitle: string) => void
-    demo?: boolean
+
 }
 
-export const Todolist = React.memo(function ({demo = false, ...props}: Props) {
-    const {
-        todolist,
-        removeTodolist,
-        removeTask,
-        addTask,
-        changeTaskStatus,
-        changeTaskTitle,
-        changeTodolistTitle,
-        changeFilter,
-        tasks
-    } = props
+export const Todolist = React.memo(function ({
+                                                 todolist,
+                                                 removeTodolist,
+                                                 removeTask,
+                                                 addTask,
+                                                 changeTaskStatus,
+                                                 changeTaskTitle,
+                                                 changeTodolistTitle,
+                                                 changeFilter,
+                                                 tasks
+                                             }: Props) {
+
 
     const dispatch = useDispatch()
     useEffect(() => {
-        if (demo) {
-            return
-        }
         const thunk = fetchTasksTC(todolist.id)
         // @ts-ignore
         dispatch(thunk)
@@ -48,7 +45,7 @@ export const Todolist = React.memo(function ({demo = false, ...props}: Props) {
 
     const addTaskHandler = useCallback((title: string) => {
         addTask(title, todolist.id)
-    }, [addTask, props.todolist.id])
+    }, [addTask, todolist.id])
 
     const removeTodolistHandler = () => {
         // removeTodolist(props.todolist.id)
